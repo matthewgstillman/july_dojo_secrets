@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dojo Secrets</title>
+    {% load staticfiles %}
+     <!-- The line above tells Django to be ready to listen for static files -->
+     <link rel="stylesheet" href="{% static 'css/july_dojo_secrets.css' %}" media="screen" title="no title"  charset="utf-8">
+  </head>
+  <body>
+      <h1>Most Popular Secrets...</h1>
+      {% for secret in secrets %}
+        {% if secret.author == currentuser %}
+        <p>{{secret.secret}} ({{secret.created_at}}) {{secret.likers.all.count}} likes <a href="delete/{{secret.id}}/pop">Delete</a></p>
+        {% elif currentuser in secret.likers.all %}
+        <p>{{secret.secret}} ({{secret.created_at}}) {{secret.likers.all.count}} likes <strong>You Liked This! </strong></p>
+        {% else %}
+        <p>{{secret.secret}} ({{secret.created_at}}) {{secret.likers.all.count}} likes <a href="like/{{secret.id}}/pop">Like</a></p>
+        {% endif %}
+      {% endfor %}
+      <a href="/secrets">BACK</a>
+      <a href="/">LOG OUT</a>
+  </body>
+</html>

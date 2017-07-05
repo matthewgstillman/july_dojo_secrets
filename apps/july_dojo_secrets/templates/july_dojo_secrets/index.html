@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dojo Secrets</title>
+    {% load staticfiles %}
+     <!-- The line above tells Django to be ready to listen for static files -->
+     <link rel="stylesheet" href="{% static 'css/july_dojo_secrets.css' %}" media="screen" title="no title"  charset="utf-8">
+  </head>
+  <body>
+      <h1>DOJO SECRETS</h1><br>
+      {% if messages %}
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+      {% endif %}
+      <h1>Registration</h1>
+      <form class="" action="/register" method="post">
+        {% csrf_token %}
+      <p>First Name: <input type="text" name="first_name"></p>
+      <p>Last Name: <input type="text" name="last_name"></p>
+      <p>Email: <input type="text" name="email" value=""></p>
+      <p>Password: <input type="password" name="password"></p>
+      <p>PW Confirm: <input type="password" name="pw_confirm"></p>
+      <input type="submit" name="register" value="Register">
+      </form>
+      <h1>Login</h1>
+      <form class="" action="/login" method="post">
+        {% csrf_token %}
+        <p>Email: <input type="text" name="email" value=""></p>
+        <p>Password: <input type="password" name="password"></p>
+        <input type="submit" name="login" value="Log In">
+      </form>
+  </body>
+</html>
